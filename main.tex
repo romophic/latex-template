@@ -1,0 +1,65 @@
+\documentclass[dvipdfmx]{article}
+\usepackage[japanese]{babel}
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{positioning,intersections,calc,arrows.meta,math}
+\title{タイトル}
+\author{著者名}
+\date{\empty}
+\begin{document}
+
+\maketitle
+
+\section*{大問1 臨界減衰} 
+\subsection*{(1)}
+運動方程式は$m\cfrac{\rm d^2x}{\rm dt^2}=-kx-6\pi au\cfrac{\rm dx}{\rm dt}$となるから、$\cfrac{\rm dx^2}{\rm dt^2}+\cfrac{6\pi au}{m}\cfrac{\rm dx}{\rm dt} + \cfrac{k}{m}x=0$  \\ 
+特性方程式 $\lambda^2+\cfrac{6\pi a\mu}{m}\lambda + \cfrac{k}{m}=0$ が重解を持つ時を考えると、$\mu_0=\cfrac{\sqrt{km}}{3\pi a}$である。
+
+\begin{figure}[htbp]
+\begin{center}
+    \includegraphics[width=100mm]{screenshot.png}
+\end{center}
+\end{figure}
+
+\begin{tikzpicture}
+\filldraw[fill opacity=0.5,fill=red]
+( 0:1cm) circle (12mm);
+\filldraw[fill opacity=0.5,fill=green]
+( 120:1cm) circle (12mm);
+\filldraw[fill opacity=0.5,fill=blue]
+(-120:1cm) circle (12mm);
+\end{tikzpicture}
+\tikzset{cross/.style={preaction={-,draw=white,line width=6pt}}}
+\begin{tikzpicture}[->]
+\node (a) at (0,2,0) {$a$}; \node (x) at (2,2,0) {$x$};
+\node (b) at (0,0,0) {$b$}; \node (y) at (2,0,0) {$y$};
+\node (s) at (0,2,2) {$s$}; \node (u) at (2,2,2) {$u$};
+\node (t) at (0,0,2) {$t$}; \node (v) at (2,0,2) {$v$};
+\draw (a) --(x);
+\draw (x) --(y);
+\draw (a) --(b);
+\draw (b) --(y);
+\draw[cross] (s) --(u);
+\draw[cross] (u) --(v);
+\draw (s) --(t);
+\draw (t) --(v);
+\draw (a) --(s);
+\draw (b) --(t);
+\draw (x) --(u);
+\draw (y) --(v);
+\end{tikzpicture}
+\begin{tikzpicture}[domain=-0.5:4]
+\draw[help lines] (-0.5,-1.1) grid (3.9,3.9);
+\draw[->] (-0.5,0) -- (4.2,0) node[right] {$x$};
+\draw[->] (0,-1.2) -- (0,4.2) node[above] {$y$};
+\draw[color=red] plot(\x,\x) node[right] {$y=x$};
+\draw[color=blue] plot(\x,{sin(\x r)}) node[right] {$y=\sin x$};
+\draw[color=orange] plot(\x,{0.05*exp(\x)})
+node[right] {$y=\frac{1}{20}\mathrm e^x$};
+\end{tikzpicture}
+
+
+\end{document}
